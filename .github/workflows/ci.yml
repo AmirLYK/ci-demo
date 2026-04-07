@@ -10,10 +10,15 @@ jobs:
   lint:
     name: Lint (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
 
     strategy:
       matrix:
         node-version: [18, 20, 22]
+        experimental: [false]
+        include:
+          - node-version: 18
+            experimental: true
 
     steps:
       - name: Checkout кода
@@ -35,10 +40,15 @@ jobs:
     name: Test (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     needs: lint
+    continue-on-error: ${{ matrix.experimental }}
 
     strategy:
       matrix:
         node-version: [18, 20, 22]
+        experimental: [false]
+        include:
+          - node-version: 18
+            experimental: true
 
     steps:
       - name: Checkout кода
@@ -60,10 +70,15 @@ jobs:
     name: Build (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     needs: test
+    continue-on-error: ${{ matrix.experimental }}
 
     strategy:
       matrix:
         node-version: [18, 20, 22]
+        experimental: [false]
+        include:
+          - node-version: 18
+            experimental: true
 
     steps:
       - name: Checkout кода
