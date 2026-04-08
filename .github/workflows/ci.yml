@@ -85,23 +85,6 @@ jobs:
           name: coverage-report
           path: coverage/
 
-
-    steps:
-      - name: Checkout кода
-        uses: actions/checkout@v4
-
-      - name: Установить Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-
-      - name: Установить зависимости
-        run: npm ci
-
-      - name: Запустить тесты
-        run: npm run test
-
   build:
     name: Build (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
